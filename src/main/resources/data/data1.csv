@@ -1,0 +1,4 @@
+OBJECTID,Identifier,OccurrenceDate,DayofWeek,OccurrenceMonth,OccurrenceDay,OccurrenceYear,OccurrenceHour,CompStatMonth,CompStatDay,CompStatYear,Offense,OffenseClassification,Sector,Precinct,Borough,Jurisdiction,XCoordinate,YCoordinate,Latitude,Longitude
+1,987726459,1982-09-21 23:20:0,Tuesday,Sep,21,1982,2300,Apr,9,2015,MURDER,FELONY,,079,Brooklyn,NYPD,999634,190253,40.688872153,-73.9445290319999
+2,987726401,1991-08-08 22:15:0,Thursday,Aug,8,1991,2200,Mar,10,2015,MURDER,FELONY,A,030,Manhattan,NYPD,996322,238267,40.820663494,-73.956385411
+3,987726875,2014-03-17 12:00:0,Monday,Mar,17,2014,1200,Jun,26,2015,RAPE,FELONY,,067,Brooklyn,NYPD,999132,175384,40.6480609220001,-73.946371991

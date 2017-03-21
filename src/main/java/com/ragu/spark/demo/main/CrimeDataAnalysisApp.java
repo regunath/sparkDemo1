@@ -22,7 +22,7 @@ public class CrimeDataAnalysisApp {
 		
 		spark.setLogLevel("WARN");
 		
-		String dataFilePath = "D:/output/data1.csv";
+		String dataFilePath = "src/main/resources/data/data1.csv";
 		JavaRDD<String> data = spark.textFile(dataFilePath);
 		
 		String header = data.first();
