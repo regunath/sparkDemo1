@@ -13,27 +13,24 @@ import scala.Tuple2;
 
 public class CrimeDataAnalysisApp {
 	  private static final Pattern SPACE = Pattern.compile(" ");
-
+	  private static final String DATA_FILE_PATH = "src/main/resources/data/data1.csv";
+	  private static final String LOG_LEVEL = "WARN";
 	public static void main(String[] args) {
 
 		SparkConf sConf = new SparkConf().setAppName("Work Count");
-		
 		JavaSparkContext spark = new JavaSparkContext(sConf);
+		spark.setLogLevel(LOG_LEVEL);
 		
-		spark.setLogLevel("WARN");
-		
-		String dataFilePath = "src/main/resources/data/data1.csv";
-		JavaRDD<String> data = spark.textFile(dataFilePath);
+		JavaRDD<String> data = spark.textFile(DATA_FILE_PATH);
 		
 		String header = data.first();
 		
 		String[] headerArr = splitBySeperator(header);
 		JavaRDD<String> dataWoHeader = data.filter(x -> !x.equalsIgnoreCase(header));
 		
-		System.out.println();	    
-//		System.out.println("Header : " + header);
-//		System.out.println("HeaderArr[0] : " + headerArr[0]);
 		System.out.println();
+		System.out.println();
+		System.out.println("*****************************************************");	    
 
 //		List<HashMap<String, String>> rowMapDataLst = dataWoHeader.map(x -> x.split(",")).map(x -> {
 //			HashMap<String, String> rowMapData = new HashMap<>();
@@ -57,15 +54,12 @@ public class CrimeDataAnalysisApp {
 		JavaPairRDD<Double, Double> globalPosition = filteredRowMapDataLst
 				.mapToPair(t -> new Tuple2<Double, Double>(Double.parseDouble(t
 						.get("Latitude")),
-						Double.parseDouble(t.get("Latitude"))));
+						Double.parseDouble(t.get("Longitude"))));
 		
 		System.out.println("Tuples " + globalPosition.collect());
 		
 		//JavaPairRDD<Long, Long> globalPosition = filteredRowMapDataLst.map(x -> new Tuple2<Long, Long>(Long.parseLong(x.get("Latitude")), Long.parseLong(x.get("Longitude"))));
 			
-			
-		
-		System.out.println("Suresh " + rowMapDataLst);
 //		System.out.println("DDDDDDDDDDDDDDDDDD");
 //		for (HashMap<String, String> hashMap : data1) {
 //			System.out.println(hashMap);
@@ -87,6 +81,10 @@ public class CrimeDataAnalysisApp {
 		}else {
 			System.out.println("EMPTY!");
 		}
+		
+		System.out.println("*****************************************************");
+		System.out.println();
+		System.out.println();
 		
 	    spark.stop();
 		
