@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Circles</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+	
+		var positiondata = null;
+		$.getJSON("gpsCoordinates.json", function(json) {
+			positiondata = json; 
+		});
+      // This example creates circles on the map, representing crime in New york city
+
+      function initMap() {
+        // Create the map.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: {lat: 40.728, lng: -73.925},
+          mapTypeId: 'roadmap'
+        });
+
+        // Construct the circle for each value pairs(lat,lng).
+        // Note: We scale the area of the circle for better visibility.
+		for (var city in positiondata) {
+          var cityCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWeight: 0.5,
+            fillColor: '#FF0000',
+            fillOpacity: 0.05,
+            map: map,
+            center: positiondata[city],
+            radius: 200
+          });
+        }
+		
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-PZOqUnxgZflH2cTCnHMuI2DNAoDQE4o&callback=initMap">
+    </script>
+  </body>
+</html>
